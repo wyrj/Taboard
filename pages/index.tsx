@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.scss';
 import { Button, Card, Input } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { checkUser, getUserName, registerUser } from '../store/userSlice';
 
 const Home: NextPage = () => {
