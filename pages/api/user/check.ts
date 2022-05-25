@@ -6,7 +6,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Api['/api/user/check'][1]>,
 ) {
-  const { name } = req.body;
-  const uid = lobby.addUser(name);
-  res.status(200).json({ name, uid });
+  const { uid } = req.body;
+  const name = lobby.findUser(uid);
+  res.status(200).json(name ? { name, uid } : null);
 }
