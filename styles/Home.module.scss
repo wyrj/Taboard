@@ -1,0 +1,25 @@
+@use './utils.scss';
+
+.root {
+  @extend %flex-center;
+
+  height: 100vh;
+  flex-direction: column;
+
+  background-color: #ececec;
+}
+
+.login-card {
+  width: 30%;
+  min-width: 300px;
+}
+
+.login-content {
+  @extend %flex-center;
+
+  gap: 0.5em;
+}
+
+.name-input {
+  flex: 1;
+}
