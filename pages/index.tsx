@@ -18,7 +18,7 @@ const Home: NextPage = () => {
     if (uid) {
       dispatch(checkUser(uid));
     }
-  }, []);
+  }, [dispatch]);
   const handleEnterName = () => {
     dispatch(registerUser(localName));
   };
