@@ -5,11 +5,13 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { checkUser, getUserName, registerUser } from '../store/userSlice';
+import { useTranslation } from 'react-i18next';
 
 const Home: NextPage = () => {
   const name = useAppSelector(getUserName);
   const [localName, setLocalName] = useState(name);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const uid = localStorage.getItem('uid');
@@ -23,13 +25,13 @@ const Home: NextPage = () => {
   const content = name
     ?
     <div>
-      <div>Hello { name }</div>
+      <div>{ t('greeting') } { name }</div>
     </div>
     :
     <div className={styles['login-content']}>
       <Input
         className={styles['name-input']}
-        placeholder="username"
+        placeholder={t('username')}
         value={localName}
         onChange={(e) => setLocalName(e.target.value)}
       />
