@@ -2,7 +2,9 @@ import type { NextPage } from 'next';
 import styles from '../styles/Home.module.scss';
 import { Button, Card, Input } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { sendApiRequest } from '../api/request';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { checkUser, getUserName, registerUser } from '../store/userSlice';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +14,7 @@ const Home: NextPage = () => {
   const [localName, setLocalName] = useState(name);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const router = useRouter();
 
   useEffect(() => {
     const uid = localStorage.getItem('uid');
@@ -22,10 +25,15 @@ const Home: NextPage = () => {
   const handleEnterName = () => {
     dispatch(registerUser(localName));
   };
+  const handelCreateRoom = async () => {
+    const roomId = await sendApiRequest('/api/room/create', undefined);
+    router.push(`/poker/${roomId}`);
+  };
   const content = name
     ?
     <div>
       <div>{ t('greeting') } { name }</div>
+      <Button onClick={handelCreateRoom}>{t('create_room')}</Button>
     </div>
     :
     <div className={styles['login-content']}>

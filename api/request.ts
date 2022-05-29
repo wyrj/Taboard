@@ -15,4 +15,5 @@ export async function sendApiRequest<T extends keyof Api>(api: T, json: Api[T][0
 export interface Api {
   '/api/user/check': [{ uid: string }, UserState | null],
   '/api/user/register': [{ name: string }, UserState],
+  '/api/room/create': [void, string],
 }
