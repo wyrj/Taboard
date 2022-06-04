@@ -1,12 +1,11 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Api } from '../../../api/request';
-import lobby from '../../../server';
+import type { NextApiResponse } from 'next';
+import type { Api, TaboardNextRequest } from '../../../api/request';
 
 export default function handler(
-  req: NextApiRequest,
+  req: TaboardNextRequest,
   res: NextApiResponse<Api['/api/user/check'][1]>,
 ) {
   const { uid } = req.body;
-  const name = lobby.findUser(uid);
+  const name = req._lobby.findUser(uid);
   res.status(200).json(name ? { name, uid } : null);
 }

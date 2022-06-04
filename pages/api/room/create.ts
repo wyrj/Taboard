@@ -1,11 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Api } from '../../../api/request';
-import lobby from '../../../server';
+import type { NextApiResponse } from 'next';
+import type { Api, TaboardNextRequest } from '../../../api/request';
 
 export default function handler(
-  req: NextApiRequest,
+  req: TaboardNextRequest,
   res: NextApiResponse<Api['/api/room/create'][1]>,
 ) {
-  const roomId = lobby.createPokerRoom();
+  const roomId = req._lobby.createPokerRoom();
   res.status(200).json(roomId);
 }
