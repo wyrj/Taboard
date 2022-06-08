@@ -11,13 +11,13 @@ async function main() {
   });
   const handle = nextApp.getRequestHandler();
 
-  const lobby = new Lobby();
-
   await nextApp.prepare();
   const server = createServer((req, res) => {
     (req as TaboardRequest)._lobby = lobby;
     handle(req, res);
   });
+  const socketServer = new Server(server);
+  const lobby = new Lobby(socketServer);
   server.listen(3000);
 }
 

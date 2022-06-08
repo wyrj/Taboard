@@ -16,7 +16,8 @@ export abstract class Room {
   public addUser(socket: Socket, uid: string, name: string): void {
     this.usersMap.set(uid, name);
     socket.join(this.roomId);
-    socket.to(this.roomId).emit('users', this.usersMap.entries());
+    socket.to(this.roomId).emit('addUser', [[uid, name]]);
+    socket.emit('users', Array.from(this.usersMap));
     this.handleSocket(socket);
   }
 
